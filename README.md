@@ -14,6 +14,7 @@ As there were not images for all building types created, some will have to be re
 My attempt to automate the task of reporting player kills (PKs) to the [Rogues Gallery](http://rg.urbandead.net).
 
 Actions:
+
 1.    Submit page to Dumbwit to generate link.
 2.    Grab witness link and navigate to the Rogues Gallery upload page.
 3.    Enter link into upload box.
