@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          UD DSS Map Skinner
 // @namespace     Klexur
-// @version       0.1
+// @version       0.1.1
 // @description   *Work In Progress* (Proof of concept) Applies images from the UDToolbar to the DSS map.
 // @include       http://dssrzs.org/map/*
 // @exclude       http://dssrzs.org/map/city
@@ -17,8 +17,13 @@ function addStyles() {
 
 	// base style for all blocks
 	//GM_addStyle('table.map div.loc {background-size: contain !important;}');
-	GM_addStyle('table.map td, div.loc {background-size: 87px !important; background-position: center !important;}');
-	GM_addStyle('table.map div.n {opacity: 0.7 !important;}');
+	GM_addStyle('table.map td, div.loc { \
+		background-size: 87px !important; \
+		background-position: center !important; \
+	}');
+	GM_addStyle('table.map div.n { \
+		opacity: 0.7 !important; \
+	}');
 
 	// high(lighted)
 	GM_addStyle('table.map div.high {border-color: #FFFF00 !important; background-color: transparent !important;}');
