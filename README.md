@@ -1,7 +1,8 @@
 These are my userscripts for the browser-based zombie apocalypse MMORPG, [Urban Dead](http://www.urbandead.com).
 
-## How to use
+## Installation
 You must have the Greasemonky addon for Firefox installed, or a browser that is natively compatible with userscripts.
+To install from here, view the desired script in raw mode. Greasemonkey should automatically detect it.
 
 ## The scripts
 
