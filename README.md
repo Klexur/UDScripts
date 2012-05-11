@@ -10,15 +10,15 @@ To install from here, view the desired script in raw mode. Greasemonkey should a
 The scripts
 -----------
 
-### UD DSS Map Skinner
+### [UD DSS Map Skinner](https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Map_Skinner.user.js)
 Applies images from the original Firefox addon, UDToolbar, to suburbs on the [DSS map](http://dssrzs.org/map/).
 
-### UD Map Skinner
+### [UD Map Skinner](https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js)
 Applies images from the original Firefox addon, UDToolbar, to the in-game map.
 
 * Not all buildings have an image, so some have to be reused as substitutes.
 
-### UD PK Reporter
+### [UD PK Reporter](https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js)
 Attempt to automate the task of reporting player kills (PKs) to the [Rogues Gallery](http://rg.urbandead.net).
 
 What it does:
