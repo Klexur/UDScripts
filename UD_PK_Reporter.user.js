@@ -4,11 +4,9 @@
 // @version        0.2.2
 // @description    *Work In Progress* Automates the task of submitting a Dumbwit url to the Rogues Gallery
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js
-// @include        http://www.urbandead.com/map.cgi*
 // @include        http://*urbandead.com/map.cgi*
 // @include        http://iamscott.net/cgi-bin/dumbwit.rb
 // @include        http://rg.urbandead.net/reports/add/url#*
-// @exclude        http://www.urbandead.com/map.cgi?logout
 // @exclude        http://*urbandead.com/map.cgi?logout
 // ==/UserScript==
 
