@@ -39,10 +39,28 @@ function addStyles() {
 
 	// base style for all blocks
 	//GM_addStyle('td.b {height:100px !important; width:100px !important; min-height: 100px !important; max-height: 100px !important; max-width: 100px !important; padding:0px !important; margin:0px !important; border:0px !important; vertical-align: top !important; overflow: hidden !important; background-repeat: no-repeat !important;}');
-	GM_addStyle('td.b {height:100px !important; width:100px !important; min-height: 100px !important; max-height: 100px !important; min-width: 100px !important; max-width: 100px !important; vertical-align: top !important;}');
-	GM_addStyle('td.b {padding:0px !important; margin:0px !important; border:0px !important;}');
-	GM_addStyle('td.b {overflow: hidden !important; background-repeat: no-repeat !important; background-position: center !important;}');
-	GM_addStyle('input.md, input.ml, input.mrl, input.mr {border:0px !important; padding:0px !important; opacity: 0.7 !important; font-size:70% !important; line-height:1 !important;}');
+	GM_addStyle('td.b { \
+		height:100px !important; \
+		width:100px !important; \
+		min-height: 100px !important; \
+		max-height: 100px !important; \
+		min-width: 100px !important; \
+		max-width: 100px !important; \
+		vertical-align: top !important; \
+		padding:0px !important; \
+		margin:0px !important; \
+		border:0px !important; \
+		overflow: hidden !important; \
+		background-repeat: no-repeat !important; \
+		background-position: center !important; \
+	}');
+	GM_addStyle('input.md, input.ml, input.mrl, input.mr { \
+		border:0px !important; \
+		padding:0px !important; \
+		opacity: 0.7 !important; \
+		font-size:70% !important; \
+		line-height:1 !important; \
+	}');
 
 	// cx inside
 	GM_addStyle('td.cx {background-image: url("data:image/gif;base64,R0lGODlhZABkALMAAHh/dhoaGmZmZklJSaeRjntZVDtkLUd8M6GIhZqfmHWdZv///8TFyioqKgAAAEhISCH5BAAAAAAALAAAAABkAGQAAAT/cCUQzFEBaGqswVQgjGRgFmiamsNgEnAsm6VQXSa47XzvAwmJY0gsGo/IpHLJbDqRk6d0Sq1WNcfHY6jter/gsHhMLpu1Sqxxyz673/A42uEtqunELl3O7/P3c0R3c36FhnJIg1uAh42OX0Vziotcj5aHgHgOd4yXnoaMggBclZ+mfZmipaesfntDaq2yoJujnbO4brC2ub1vu6u+wmHAt8PHi7HIy3MmwczCQyPP0L3SAtTVuNfZ2rJDzsbe37Xd46ewAebnn7DY4uym4O/xudzw9ZfS6vj5j9K8/LUCF1AgunL9DNJSprAdwobyHkL0VGwiRYkW/2HM2KgiR0ce/z9i2ijSFcmSf06ijBNyZUqGLhGpjHmmJc1fM2+SsanTDM+eO3MCBfNzKDGhRvUgTZqsIFMxRZ824yd1zJAW65heHZA16dauRr8m9OoA69iwZbmeHSq2KtS0YNnCXQv0KlW3RMsiiFvXQYC9dHsOQcCAr2AHhA3rHAwYb14Edx0rReBU8pAGlR1Hlbr5aWetmyJLTkZvdLPSpu+ZnmND8U2ArmkSjB3zM9lwqxdNC7zYQetXo6UZiISGs6YKefRULRLgACnlfUsR6VCJONpABvitAR0ow/bir5VqQriKdj48lFQl6RtIvZX38OM/ASK/vv37QSbcAJGBw4H/GIhAwh0IJmgQgAorBNDCgi4EIMODApZgAX8/VGghEAtEAAA7") !important;}');
