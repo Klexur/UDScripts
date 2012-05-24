@@ -26,3 +26,6 @@ What it does:
 1. Submit page to Dumbwit to generate link.
 2. Grab witness link and navigate to the Rogues Gallery upload page.
 3. Enter link into upload box.
+
+### [UDBrain DSS Map](https://github.com/Klexur/UDScripts/raw/master/UDBrain_DSS_Map.user.js)
+Displays the UDBrain data on the [DSS map](http://dssrzs.org/map/).
