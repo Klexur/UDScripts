@@ -3,7 +3,7 @@
 // @namespace      Klexur
 // @version        0.1
 // @description    Displays the UDBrain data on the DSS map
-// @updateURL      https://github.com/Klexur/UDScripts/raw/master/UDBrain_DSS_Map.user.js
+// @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js
 // @include        http://dssrzs.org/map/*
 // @exclude        http://dssrzs.org/map/city
 // ==/UserScript==
