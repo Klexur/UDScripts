@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           UDBrain DSS Map
+// @name           UD DSS Brain Map
 // @namespace      Klexur
 // @version        0.1
 // @description    Displays the UDBrain data on the DSS map
