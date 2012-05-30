@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD DSS Brain Map
 // @namespace      Klexur
-// @version        0.1
+// @version        0.1.1
 // @description    Displays the UDBrain data on the DSS map
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js
 // @include        http://dssrzs.org/map/*
@@ -37,7 +37,7 @@ function getData(building, currentBlock) {
 		method: 'GET',
 		url: 'http://www.alloscomp.com/udbrain/api4ext.php?'+building,
 		onload: function(response) {
-			if(response != '') {
+			if(response.responseText != '') {
 				var data = response.responseText;
 				//console.log(data);
 				var arr = data.split(':');
