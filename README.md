@@ -9,6 +9,8 @@ To install from here, view the desired script in raw mode. Greasemonkey should a
 
 The scripts
 -----------
+### [UD DSS Brain Map](https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js)
+Displays the UDBrain data on the [DSS map](http://dssrzs.org/map/).
 
 ### [UD DSS Map Skinner](https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Map_Skinner.user.js)
 Applies images from the original Firefox addon, UDToolbar, to suburbs on the [DSS map](http://dssrzs.org/map/).
@@ -26,6 +28,3 @@ What it does:
 1. Submit page to Dumbwit to generate link.
 2. Grab witness link and navigate to the Rogues Gallery upload page.
 3. Enter link into upload box.
-
-### [UD DSS Brain Map](https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js)
-Displays the UDBrain data on the [DSS map](http://dssrzs.org/map/).
