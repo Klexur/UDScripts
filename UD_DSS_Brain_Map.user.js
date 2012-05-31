@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD DSS Brain Map
 // @namespace      Klexur
-// @version        0.1.1
+// @version        0.1.2
 // @description    Displays the UDBrain data on the DSS map
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js
 // @include        http://dssrzs.org/map/*
@@ -56,13 +56,13 @@ function addData(currentBlock, timestamp, rtype, barricades) {
 }
 
 function convertCadeLevelToShort(cl) {
-	if(cl == 1) return "Opn";
-	if(cl == 2) return "Cls";
-	if(cl == 3) return "LoB";
-	if(cl == 4) return "LiB";
-	if(cl == 5) return "QSB";
-	if(cl == 6) return "VSB";
-	if(cl == 7) return "HeB";
-	if(cl == 8) return "VHB";
-	if(cl == 9) return "EHB";
+	if(cl == 1) return "(Opn)";
+	if(cl == 2) return "(Cls)";
+	if(cl == 3) return "(LoB)";
+	if(cl == 4) return "(LiB)";
+	if(cl == 5) return "(QSB)";
+	if(cl == 6) return "(VSB)";
+	if(cl == 7) return "(HeB)";
+	if(cl == 8) return "(VHB)";
+	if(cl == 9) return "(EHB)";
 }
