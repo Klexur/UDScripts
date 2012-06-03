@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD DSS Brain Map
 // @namespace      Klexur
-// @version        0.1.2
+// @version        0.1.3
 // @description    Displays the UDBrain data on the DSS map
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js
 // @include        http://dssrzs.org/map/*
@@ -15,17 +15,16 @@ window.addEventListener('load', getCoords(), true);
 function getCoords() {
 	var query = '//table[@class="map"]//td//div[@class="p"]';
 	var blocks = document.evaluate(query, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	console.log('blocks.snapshotLength: ' + blocks.snapshotLength);
+	//console.log('blocks.snapshotLength: ' + blocks.snapshotLength);
 	
-	var coordinates = '';
 	for (var i = 0; i < blocks.snapshotLength; i++) {
-        var currentBlock = blocks.snapshotItem(i).parentNode;
-        // Non Free-running: carpark cemetary monument park street wasteland zoo
+		var currentBlock = blocks.snapshotItem(i).parentNode;
+		// Non Free-running: carpark cemetary monument park street wasteland zoo
     	if ((currentBlock.className!='loc cprk')&&(currentBlock.className!='loc ceme')&&
 			(currentBlock.className!='loc monu')&&(currentBlock.className!='loc park')&&
 			(currentBlock.className!='loc opns')&&(currentBlock.className!='loc wast')&&
 			(currentBlock.className!='loc zoox')) { 
-			coordinates = currentBlock.firstChild.innerHTML.replace(',','');
+			var coordinates = blocks.snapshotItem(i).innerHTML.replace(',','');
 			//console.log('coordinates: ' + coordinates);
 			getData(coordinates, currentBlock);
 		}
