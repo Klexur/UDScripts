@@ -16,7 +16,6 @@ specialBlocks();
 function specialBlocks() {
 	var query = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td//input[@name="v"]';
 	var coords = document.evaluate(query, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	console.log('coords.snapshotLength: ' + coords.snapshotLength);
 	
 	for (var i = 0; i < coords.snapshotLength; i++) {
 		var currentBlock = coords.snapshotItem(i).parentNode.parentNode;
@@ -24,7 +23,6 @@ function specialBlocks() {
 		
 		// mall blocks
 		if (currentBlock.className.match(/c6/)) {
-			console.log(coordinates + ': ' + currentBlock.className);
 			// northwest mall
 			if (coordinates.match(/(32-44|43-9|78-73|49-98|19-27|25-9|75-28|84-41|66-55|90-79|99-77|28-76|85-65|58-52|52-80|52-23|20-81|92-7|67-44|62-62)/)) {
 				currentBlock.className += '-nw';
@@ -78,7 +76,6 @@ function specialBlocks() {
 		}
 		// fort blocks
 		else if (currentBlock.className.match(/c(39|4[0-5])/)) {
-			console.log(coordinates + ': ' + currentBlock.className);
 			if (coordinates.match(/(78-47|84-89)/)) {
 				currentBlock.className += ' c310';
 			}
