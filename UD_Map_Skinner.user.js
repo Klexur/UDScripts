@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.2.1
+// @version        0.2.2
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @include        http://*urbandead.com/map.cgi*
@@ -13,65 +13,80 @@
 addStyles();
 specialBlocks();
 
+function getGPS() {
+	var neighboring_buttons = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr[count(td/input) = 1]/td/form/input[@name='v']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+	if(neighboring_buttons.snapshotLength == 0) return;
+
+	var gps = neighboring_buttons.snapshotItem(0).value.split('-');
+	var offset = neighboring_buttons.snapshotItem(0).parentNode.parentNode.nextSibling ? 1: -1;
+
+	return ((parseInt(gps[0]) + offset) + "-" + parseInt(gps[1]));
+}
+
 function specialBlocks() {
-	var query = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td//input[@name="v"]';
-	var coords = document.evaluate(query, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+	var qBlocks = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td';
+	var blocks = document.evaluate(qBlocks, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+	var qCoords = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td//input[@name="v"]';
+	var coords = document.evaluate(qCoords, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	
-	for (var i = 0; i < coords.snapshotLength; i++) {
-		var currentBlock = coords.snapshotItem(i).parentNode.parentNode;
-		var coordinates = coords.snapshotItem(i).value;
+	for (var i = 1; i < blocks.snapshotLength; i++) {
+		var currentBlock = blocks.snapshotItem(i);
+		
+		if (i<5) coordinates = coords.snapshotItem(i-1).value;
+		else if (i==5) coordinates = getGPS();
+		else coordinates = coords.snapshotItem(i-2).value;
 		
 		// mall blocks
 		if (currentBlock.className.match(/c6/)) {
 			// northwest mall
 			if (coordinates.match(/(32-44|43-9|78-73|49-98|19-27|25-9|75-28|84-41|66-55|90-79|99-77|28-76|85-65|58-52|52-80|52-23|20-81|92-7|67-44|62-62)/)) {
-				currentBlock.className += '-nw';
+				currentBlock.className = currentBlock.className.replace(/c6/,'c6-nw');
 			}
 			// northeast mall
 			else if (coordinates.match(/(33-44|44-9|79-73|50-98|20-27|26-9|76-28|85-41|67-55|91-79|29-76|86-65|59-52|53-80|53-23|21-81|93-7|68-44|63-62)/)) {
-				currentBlock.className += '-ne';
+				currentBlock.className = currentBlock.className.replace(/c6/,'c6-ne');
 			}
 			// southwest mall
 			else if (coordinates.match(/(32-45|43-10|78-74|49-99|19-28|25-10|75-29|84-42|66-56|90-80|99-78|28-77|85-66|58-53|52-24|20-82|92-8|67-45|62-63)/)) {
-				currentBlock.className += '-sw';
+				currentBlock.className = currentBlock.className.replace(/c6/,'c6-sw');
 			}
 			// southeast mall
 			else if (coordinates.match(/(33-45|44-10|79-74|50-99|20-28|26-10|76-29|85-42|67-56|91-80|29-77|86-66|59-53|53-81|53-24|21-82|93-8|68-45|63-63)/)) {
-				currentBlock.className += '-se';
+				currentBlock.className = currentBlock.className.replace(/c6/,'c6-se');
 			}
 		}
 		// stadium blocks
 		else if (currentBlock.className.match(/c16/)) {
 			if (coordinates.match(/(51-81|47-43|60-6)/)) {
-				currentBlock.className += '-nw';
+				currentBlock.className = currentBlock.className.replace(/c16/,'c16-nw');
 			}
 			else if (coordinates.match(/(48-43|61-6)/)) {
-				currentBlock.className += '-ne';
+				currentBlock.className = currentBlock.className.replace(/c16/,'c16-ne');
 			}
 			// stadium overlaps mall
 			else if (coordinates.match(/52-81/)) {
-				currentBlock.className += '-mallstad';
+				currentBlock.className = currentBlock.className.replace(/c16/,'c16-mallstad');
 			}
 			else if (coordinates.match(/(51-82|48-44|60-7)/)) {
-				currentBlock.className += '-sw';
+				currentBlock.className = currentBlock.className.replace(/c16/,'c16-sw');
 			}
 			else if (coordinates.match(/(52-82|48-44|61-7)/)) {
-				currentBlock.className += '-se';
+				currentBlock.className = currentBlock.className.replace(/c16/,'c16-se');
 			}
 		}
 		// mansion blocks
 		else if (currentBlock.className.match(/c25/)) {
 			if (coordinates.match(/(51-36|67-4|57-58|21-0|49-8)/)) {
-				currentBlock.className += '-nw';
+				currentBlock.className = currentBlock.className.replace(/c25/,'c25-nw');
 			}
 			else if (coordinates.match(/(52-36|68-4|58-58|22-0|50-8)/)) {
-				currentBlock.className += '-ne';
+				currentBlock.className = currentBlock.className.replace(/c25/,'c25-ne');
 			}
 			else if (coordinates.match(/(51-37|67-5|57-59|21-1|49-9)/)) {
-				currentBlock.className += '-sw';
+				currentBlock.className = currentBlock.className.replace(/c25/,'c25-sw');
 			}
 			else if (coordinates.match(/(52-37|68-5|58-59|22-1|50-9)/)) {
-				currentBlock.className += '-se';
+				currentBlock.className = currentBlock.className.replace(/c25/,'c25-se');
 			}
 		}
 		// fort blocks
