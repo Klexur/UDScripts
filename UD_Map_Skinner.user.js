@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.2.2
+// @version        0.3.0
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @include        http://*urbandead.com/map.cgi*
