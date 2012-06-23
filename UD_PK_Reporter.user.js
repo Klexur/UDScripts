@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           UD PK Reporter
 // @namespace      Klexur
-// @version        0.2.2
-// @description    *Work In Progress* Automates the task of submitting a Dumbwit url to the Rogues Gallery
+// @version        0.2.3
+// @description    Automates the task of submitting a Dumbwit url to the Rogues Gallery.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js
 // @include        http://*urbandead.com/map.cgi*
 // @include        http://iamscott.net/cgi-bin/dumbwit.rb
@@ -11,12 +11,12 @@
 // ==/UserScript==
 
 var durl = document.location.href
-if (durl.indexOf('urbandead.com/map.cgi') != -1) addButton();
+if (durl.match(/urbandead.com.*map.cgi/)) addButton();
 
 // Wait for page to load
 window.addEventListener('load', function() {
-	if (durl.indexOf('iamscott.net/cgi-bin/dumbwit.rb') != -1) getLink();
-	if (durl.indexOf('rg.urbandead.net/reports/add/url#') != -1) openReport();
+	if (durl.match(/iamscott.net.*cgi-bin.*dumbwit.rb/)) getLink();
+	if (durl.match(/rg.urbandead.net.*reports.*add.*url#/)) openReport();
 }, true);
 
 function addButton() {
@@ -55,7 +55,6 @@ function getLink() {
 	// Assuming Dumbwit capture is first link
 	var link = a[0].href;
 	window.location.replace('http://rg.urbandead.net/reports/add/url#' + link);
-	//copyToClipboard(link);
 }
 
 function openReport() {
@@ -69,8 +68,4 @@ function openReport() {
 
 	var upload = document.getElementsByName('upload');
 	upload[0].click();
-}
-
-function copyToClipboard(text) {
-  window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
 }
