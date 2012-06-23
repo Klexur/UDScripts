@@ -21,10 +21,6 @@ Applies images from the original Firefox addon, UDToolbar, to the in-game map.
 * Not all buildings have an image, so some have to be reused as substitutes.
 
 ### [UD PK Reporter](https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js)
-Attempt to automate the task of reporting player kills (PKs) to the [Rogues Gallery](http://rg.urbandead.net).
-
-What it does:
-
-1. Submit page to Dumbwit to generate link.
-2. Grab witness link and navigate to the Rogues Gallery upload page.
-3. Enter link into upload box.
+Automates the task of reporting player kills (PKs) to the [Rogues Gallery](http://rg.urbandead.net).
+### [UD PK Reporter Private](https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter_Private.user.js)
+Automates the task of reporting player kills (PKs) to the [Rogues Gallery](http://rg.urbandead.net) while hiding HP, AP, and Inventory.
