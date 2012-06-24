@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           UD PK Reporter
 // @namespace      Klexur
-// @version        0.2.3
-// @description    Automates the task of submitting a Dumbwit url to the Rogues Gallery.
+// @version        0.3
+// @description    Automates the task of reporting player kills (PKs) to the Rogues Gallery.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js
 // @include        http://*urbandead.com/map.cgi*
 // @include        http://iamscott.net/cgi-bin/dumbwit.rb
@@ -22,9 +22,9 @@ window.addEventListener('load', function() {
 function addButton() {
 	var input = document.createElement('input');
 	input.type = 'submit';
-	input.className = 'y';
+	input.className = 'm';
+	input.id = 'PK_Reporter';
 	input.value = 'Report PK';
-	input.style.color = '#FF9999';
 	input.addEventListener(
 		'click',
 		function(event) {
@@ -38,16 +38,21 @@ function addButton() {
 		false
 	);
 	
+	var form = document.createElement('form');
+	form.className = 'a';
+	form.method = 'post';
+	form.action = 'map.cgi';
+	form.appendChild(input);
+
 	var frag = document.createDocumentFragment();
-	frag.appendChild(input);
+	frag.appendChild(form);
 	frag.appendChild(document.createTextNode(' '));		// seems to create the equivalent of &nbsp;
 
-	var firstA = document.evaluate('//td[@class="cp"]/p[2]/a', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-	if (!firstA)
-		document.evaluate('//td[@class="cp/p"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0).appendChild(frag);
+	var firstForm = document.evaluate('//td[@class="gp"]/form', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
+	if (!firstForm)
+		document.evaluate('//td[@class="gp"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0).appendChild(frag);
 	else
-		// Place after Donate link
-		firstA.parentNode.appendChild(frag);
+		firstForm.parentNode.insertBefore(frag, firstForm.nextSibling);
 }
 
 function getLink() {
