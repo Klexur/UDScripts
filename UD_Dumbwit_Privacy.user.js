@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Dumbwit Privacy
 // @namespace      Klexur
-// @version        1.1
+// @version        1.2
 // @description    Hides HP, AP, and Inventory before making Dumbwit report.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js
 // @include        http://*urbandead.com/map.cgi*
@@ -22,9 +22,12 @@ function addButton() {
 			event.stopPropagation();
 			event.preventDefault();
 			var pre_body = document.body.innerHTML;
-			var barrista = document.evaluate('//td[@class="cp"]/div[@class="gt"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-			if (!barrista) hideBarrista(pre_body);
-			else hideDefault(pre_body);
+			var barrista = document.getElementById('barrista');
+			if (barrista) hideBarrista();
+			else hideDefault();
+			getDumbwit();
+			// return info
+			document.body.innerHTML = pre_body;
 		},
 		false
 	);
@@ -46,52 +49,39 @@ function addButton() {
 		firstForm.parentNode.insertBefore(frag, firstForm.nextSibling);
 }
 
-function hideBarrista(pre_body) {
+function hideBarrista() {
 	// get info
-	var AP = document.evaluate('/html/body/div/div/div[2]/div/div', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-	var AP_bar = AP.nextSibling
-	var HP = document.evaluate('/html/body//div/div/div[2]/div[2]/div', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-	var HP_bar = HP.nextSibling
+	var AP = document.getElementById('barristaaptext');
+	var AP_bar = document.getElementById('barristaapbar');
+	var HP = document.getElementById('barristahptext');
+	var HP_bar = document.getElementById('barristahpbar');
 
 	// hide info
 	AP.innerHTML = 'XXAP'
 	AP_bar.parentNode.removeChild(AP_bar);
 	HP.innerHTML = 'XXHP'
 	HP_bar.parentNode.removeChild(HP_bar);
-	
+
 	var forms = document.evaluate('//td[@class="gp"]//form[@class="a"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	for (var j=0; j<forms.snapshotLength; j++) {
 		forms.snapshotItem(j).parentNode.removeChild(forms.snapshotItem(j));
 	}
-
-	getDumbwit();
-
-	// return info
-	document.body.innerHTML = pre_body;
 }
 
-function hideDefault(pre_body) {
+function hideDefault() {
 	// get info
-	var points = document.evaluate('//div[@class="gt"]//b', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+	var points = document.evaluate('//td[@class="cp"]//div[@class="gt"]//b', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	var i=0, HP, AP;
 
-	if (points.snapshotItem(1).innerHTML == 'dead') i=1;
-	HP = points.snapshotItem(1+i).innerHTML;
-	AP = points.snapshotItem(3+i).innerHTML;
-
+	if (points.snapshotLength > 0 && points.snapshotItem(1).innerHTML == 'dead') i=1;
 	// hide info
 	points.snapshotItem(1+i).innerHTML = 'XX'; // HP
 	points.snapshotItem(3+i).innerHTML = 'XX'; // AP
-	
+
 	var forms = document.evaluate('//td[@class="gp"]//form[@class="a"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	for (var j=0; j<forms.snapshotLength; j++) {
 		forms.snapshotItem(j).parentNode.removeChild(forms.snapshotItem(j));
 	}
-
-	getDumbwit();
-
-	// return info
-	document.body.innerHTML = pre_body;
 }
 
 function getDumbwit() {
