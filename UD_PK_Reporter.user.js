@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD PK Reporter
 // @namespace      Klexur
-// @version        0.3
+// @version        1.0
 // @description    Automates the task of reporting player kills (PKs) to the Rogues Gallery.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_PK_Reporter.user.js
 // @include        http://*urbandead.com/map.cgi*
