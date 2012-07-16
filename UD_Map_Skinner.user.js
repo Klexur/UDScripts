@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.4
+// @version        0.5
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @include        http://*urbandead.com/map.cgi*
@@ -9,6 +9,8 @@
 // ==/UserScript==
 
 // images converted using http://uri.rappdaniel.com/
+
+var showGPS = true;
 
 addStyles();
 specialBlocks();
@@ -172,16 +174,21 @@ function addStyles() {
 function specialBlocks() {
 	var qBlocks = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td';
 	var blocks = document.evaluate(qBlocks, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	var qCoords = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td//input[@name="v"]';
-	var coords = document.evaluate(qCoords, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	
+
 	for (var i = 1; i < blocks.snapshotLength; i++) {
 		var currentBlock = blocks.snapshotItem(i);
 		var coordinates;
 
-		if (i<5) coordinates = coords.snapshotItem(i-1).value;
-		else if (i==5) coordinates = getGPS();
-		else coordinates = coords.snapshotItem(i-2).value;
+		switch (currentBlock.firstChild.tagName) {
+			case 'INPUT':
+				coordinates = getGPS(false);
+				if (showGPS) showCoords(coordinates);
+				break;
+			case 'FORM':
+				coordinates = currentBlock.innerHTML.match(/\d+-\d+/);
+				coordinates = coordinates[0];
+				break;
+		}
 
 		// mall blocks
 		// northwest mall
@@ -299,24 +306,41 @@ function specialBlocks() {
 				currentBlock.className += ' c317';
 			}
 		}
-		
 	}
+	if (blocks.snapshotLength < 10) addBorder();
 }
 
-function getGPS() {
+function getGPS(bordercheck) {
 	var neighboring_buttons = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr[count(td/input) = 1]/td/form/input[@name='v']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	if(neighboring_buttons.snapshotLength == 0) return;
 
 	var gps = neighboring_buttons.snapshotItem(0).value.split('-');
 	var offset = neighboring_buttons.snapshotItem(0).parentNode.parentNode.nextSibling ? 1: -1;
+	var coords = (parseInt(gps[0]) + offset) + "-" + parseInt(gps[1]);
 
-	//showCoords((parseInt(gps[0]) + offset) + "," + parseInt(gps[1]));
-	return ((parseInt(gps[0]) + offset) + "-" + parseInt(gps[1]));
+	if (bordercheck) coords = coords.split('-');
+
+	return coords;
 }
 
-function showCoords(coordStr) {
+function showCoords(coordinates) {
 	var elem = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr/td[@class='sb']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	
+
 	if(elem.snapshotLength == 0) return;
-	if(coordStr != null) elem.snapshotItem(0).innerHTML += ' [' + coordStr + ']';
+	if(coordinates != null) elem.snapshotItem(0).innerHTML += ' [' + coordinates + ']';
+}
+
+function addBorder(currentBlock) {
+	var coords = getGPS(true);
+	var left = ((coords[0] == 0) ? true:false);
+	var right = ((coords[0] == 99) ? true:false);
+
+	var cityRows = document.getElementsByTagName('tr');
+	var newCell;
+
+	if (left || right) {
+		newCell = cityRows[2].insertCell(left?0:2);
+		newCell = cityRows[3].insertCell(left?0:2);
+		newCell = cityRows[4].insertCell(left?0:2);
+	}
 }
