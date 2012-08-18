@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Dumbwit Privacy
 // @namespace      Klexur
-// @version        1.3
+// @version        1.4
 // @description    Hides HP, AP, and Inventory before making Dumbwit report.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js
 // @include        http://*urbandead.com/map.cgi*
@@ -25,6 +25,7 @@ function addButton() {
 			var barrista = document.getElementById('barrista');
 			if (barrista) hideBarrista();
 			else hideDefault();
+			hideInventory();
 			getDumbwit();
 			// return info
 			document.body.innerHTML = pre_body;
@@ -64,18 +65,13 @@ function hideBarrista() {
 	AP_time.innerHTML = AP_time.innerHTML.replace(/[0-9]+/, 'XXXX');
 	HP.innerHTML = 'XXHP'
 	HP_bar.parentNode.removeChild(HP_bar);
-
-	var forms = document.evaluate('//td[@class="gp"]//form[@class="a"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	for (var j=0; j<forms.snapshotLength; j++) {
-		forms.snapshotItem(j).parentNode.removeChild(forms.snapshotItem(j));
-	}
 }
 
 function hideDefault() {
 	// get info
 	var points = document.evaluate('//td[@class="cp"]//div[@class="gt"]//b', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	var font = document.evaluate('//td[@class="cp"]//div[@class="gt"]//font', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	var i=0, HP, AP;
+	var i=0;
 
 	if (points.snapshotLength > 0 && points.snapshotItem(1).innerHTML == 'dead') i=1;
 	// hide info
@@ -85,7 +81,9 @@ function hideDefault() {
 		// remove AP recovery time
 		font.snapshotItem(0).parentNode.removeChild(font.snapshotItem(0));
 	}
+}
 
+function hideInventory() {
 	var forms = document.evaluate('//td[@class="gp"]//form[@class="a"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 	for (var j=0; j<forms.snapshotLength; j++) {
 		forms.snapshotItem(j).parentNode.removeChild(forms.snapshotItem(j));
