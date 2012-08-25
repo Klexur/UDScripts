@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           UD DSS Brain Map
 // @namespace      Klexur
-// @version        0.2.0
+// @version        1.0
 // @description    Displays the UDBrain data on the DSS map
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Brain_Map.user.js
-// @include        http://dssrzs.org/map/*
-// @exclude        http://dssrzs.org/map/city
+// @include        http://map.dssrzs.org/*
+// @exclude        http://map.dssrzs.org/city
 // ==/UserScript==
 
 // Ben2's UDBrainMap script used as reference and some code borrowed.
@@ -15,8 +15,7 @@ window.addEventListener('load', getBlocks(), true);
 function getBlocks() {
 	var query = '//table[@class="map"]//td[contains(@class,loc)]';
 	var blocks = document.evaluate(query, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	unsafeWindow.console.log('Brain blocks.snapshotLength: ' + blocks.snapshotLength);
-	
+
 	for (var i = 0; i < blocks.snapshotLength; i++) {
 		var currentBlock = blocks.snapshotItem(i).firstChild;
 		// Non Free-running: carpark cemetary monument park street wasteland zoo
@@ -77,7 +76,7 @@ function getAge(seconds) {
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
 	var days = Math.floor(hours / 24);
-	
+
 	// Handle new time granularity
 	var agestr = '';
 	if(seconds == 3600) agestr = '<1h';
