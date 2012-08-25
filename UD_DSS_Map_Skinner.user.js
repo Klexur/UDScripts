@@ -4,9 +4,7 @@
 // @version       1.0
 // @description   Applies images from the UDToolbar to the DSS map.
 // @updateURL     https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Map_Skinner.user.js
-// @include       http://dssrzs.org/map/*
 // @include       http://map.dssrzs.org/*
-// @exclude       http://dssrzs.org/map/city
 // @exclude       http://map.dssrzs.org/city
 // ==/UserScript==
 
