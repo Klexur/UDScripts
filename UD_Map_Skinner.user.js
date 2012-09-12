@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.5
+// @version        0.6
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
+// @grant          GM_addStyle
 // @include        http://*urbandead.com/map.cgi*
 // @exclude        http://*urbandead.com/map.cgi?logout
 // ==/UserScript==
@@ -172,8 +173,7 @@ function addStyles() {
 }
 
 function specialBlocks() {
-	var qBlocks = '//td[@class="cp"]/table[@class="c"]/tbody/tr/td';
-	var blocks = document.evaluate(qBlocks, document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+	var blocks = document.evaluate('//td[@class="cp"]/table[@class="c"]/tbody/tr/td', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 
 	for (var i = 1; i < blocks.snapshotLength; i++) {
 		var currentBlock = blocks.snapshotItem(i);
@@ -312,7 +312,7 @@ function specialBlocks() {
 
 function getGPS(bordercheck) {
 	var neighboring_buttons = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr[count(td/input) = 1]/td/form/input[@name='v']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-	if(neighboring_buttons.snapshotLength == 0) return;
+	if (neighboring_buttons.snapshotLength == 0) return;
 
 	var gps = neighboring_buttons.snapshotItem(0).value.split('-');
 	var offset = neighboring_buttons.snapshotItem(0).parentNode.parentNode.nextSibling ? 1: -1;
@@ -330,10 +330,12 @@ function showCoords(coordinates) {
 	if(coordinates != null) elem.snapshotItem(0).innerHTML += ' [' + coordinates + ']';
 }
 
-function addBorder(currentBlock) {
+function addBorder() {
 	var coords = getGPS(true);
 	var left = ((coords[0] == 0) ? true:false);
 	var right = ((coords[0] == 99) ? true:false);
+	var top = ((coords[1] == 0) ? true:false);
+	var bottom = ((coords[1] == 99) ? true:false);
 
 	var cityRows = document.getElementsByTagName('tr');
 	var newCell;
@@ -341,6 +343,8 @@ function addBorder(currentBlock) {
 	if (left || right) {
 		newCell = cityRows[2].insertCell(left?0:2);
 		newCell = cityRows[3].insertCell(left?0:2);
-		newCell = cityRows[4].insertCell(left?0:2);
+		if (!top && !bottom) {
+			newCell = cityRows[4].insertCell(left?0:2);
+		}
 	}
 }
