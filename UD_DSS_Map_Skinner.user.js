@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name          UD DSS Map Skinner
 // @namespace     Klexur
-// @version       1.0
+// @version       1.1
 // @description   Applies images from the UDToolbar to the DSS map.
 // @updateURL     https://github.com/Klexur/UDScripts/raw/master/UD_DSS_Map_Skinner.user.js
+// @grant         GM_addStyle
 // @include       http://map.dssrzs.org/*
 // @exclude       http://map.dssrzs.org/city
 // ==/UserScript==
