@@ -1,34 +1,44 @@
 // ==UserScript==
 // @name           UD Dumbwit Privacy
 // @namespace      Klexur
-// @version        1.4
+// @version        2.0
 // @description    Hides HP, AP, and Inventory before making Dumbwit report.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js
 // @include        http://*urbandead.com/map.cgi*
 // @exclude        http://*urbandead.com/map.cgi?logout
+// @include        http://iamscott.net/*.html
+// @include        http://rg.urbandead.net/reports/add/url#*
 // ==/UserScript==
 
-addButton();
+var durl = document.location.href
+if (durl.match(/urbandead.com.*map.cgi/)) addButton('Dumbwit');
+window.addEventListener('load', function() {
+	if (durl.match(/rg.urbandead.net.*reports.*add.*url#/)) openReport();
+}, true);
+if (durl.match(/iamscott.net.*.html/)) addButton('Report PK');
 
-function addButton() {
+function addButton(btnName) {
 	var input = document.createElement('input');
 	input.type = 'submit';
 	input.className = 'm';
 	input.id = 'Dumbwit_Privacy';
-	input.value = 'Dumbwit';
+	input.value = btnName;
 	input.addEventListener(
 		'click',
 		function(event) {
 			event.stopPropagation();
 			event.preventDefault();
-			var pre_body = document.body.innerHTML;
-			var barrista = document.getElementById('barrista');
-			if (barrista) hideBarrista();
-			else hideDefault();
-			hideInventory();
-			getDumbwit();
-			// return info
-			document.body.innerHTML = pre_body;
+			if (btnName == 'Dumbwit') {
+				var pre_body = document.body.innerHTML;
+				var barrista = document.getElementById('barrista');
+				if (barrista) hideBarrista();
+				else hideDefault();
+				hideInventory();
+				getDumbwit();
+				// return info
+				document.body.innerHTML = pre_body;
+			}
+			else if (btnName == 'Report PK') getLink();
 		},
 		false
 	);
@@ -95,4 +105,22 @@ function getDumbwit() {
 	var w = window.open('', d);
 	w.document.write('<html><body><form name="wF" action="http://iamscott.net/cgi-bin/dumbwit.rb" method="post"><input name="wP" value="PRIVATE" /><input name="wC" value="' + prompt('Enter Dumbwit comment - may be blank.') + '"><input name="wT" value="' + window.document.lastModified + '" /><input name="wZ" value="' + d.getTimezoneOffset() + '" /><input name="wV" value="23" /><textarea name="wS">' + document.body.innerHTML + '</textarea></form>');
 	w.document.forms[0].submit();
+}
+
+function getLink() {
+	var link = durl;
+	window.location.replace('http://rg.urbandead.net/reports/add/url#' + link);
+}
+
+function openReport() {
+	var i = durl.indexOf('#');
+	if (i == -1) return;
+
+	var link = durl.substring(i+1);
+	var upinput = document.getElementById('DocumentUrl');
+	//upinput.focus();
+	upinput.value = link;
+
+	var upload = document.getElementsByName('upload');
+	upload[0].click();
 }
