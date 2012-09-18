@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.6
+// @version        0.7
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @grant          GM_addStyle
@@ -280,7 +280,7 @@ function specialBlocks() {
 		}
 
 		// fort blocks
-		else if (currentBlock.className.match(/c(39|4[0-5])/)) {
+		if (currentBlock.className.match(/c(39|4[0-5])/)) {
 			if (coordinates.match(/(78-47|84-89)/)) {
 				currentBlock.className += ' c310';
 			}
@@ -304,6 +304,39 @@ function specialBlocks() {
 			}
 			else if (coordinates.match(/(80-49|86-91)/)) {
 				currentBlock.className += ' c317';
+			}
+		}
+		
+		// Christmas lights
+		var lights = currentBlock.className.match(/light(g|r|w)/);
+		if (lights) {
+			if (currentBlock.className.match(/lightw/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_w.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightrw/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_rw.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightr/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_r.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightgw/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_gw.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightgrw/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_grw.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightgr/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_gr.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
+			}
+			else if (currentBlock.className.match(/lightg/)) {
+				currentBlock.innerHTML = '<div style="height:12px; background-image: url(' + "'../im/lights_g.png'" + ');"></div>' + currentBlock.innerHTML;
+				continue;
 			}
 		}
 	}
