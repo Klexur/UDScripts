@@ -16,7 +16,7 @@ Scripts
 * Applies images from the original Firefox addon, UDToolbar, to suburbs on the [DSS map](http://dssrzs.org/map/).
 
 ### [UD Dumbwit Privacy](https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js)
-* Hides HP, AP, and Inventory before making Dumbwit report.
+* Hides HP, AP, and Inventory before making Dumbwit report. Viewing the Dumbwit provides a PK Reporter option.
 
 ### [UD Map Skinner](https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js)
 * Applies images from the original Firefox addon, UDToolbar, to the in-game map.

@@ -2,7 +2,7 @@
 // @name           UD Dumbwit Privacy
 // @namespace      Klexur
 // @version        2.0
-// @description    Hides HP, AP, and Inventory before making Dumbwit report.
+// @description    Hides HP, AP, and Inventory before making Dumbwit report. Viewing the Dumbwit provides a PK Reporter option.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js
 // @include        http://*urbandead.com/map.cgi*
 // @exclude        http://*urbandead.com/map.cgi?logout
