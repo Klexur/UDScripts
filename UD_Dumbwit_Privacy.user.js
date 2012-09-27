@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name           UD Dumbwit Privacy
 // @namespace      Klexur
-// @version        2.0
+// @version        2.1
 // @description    Hides HP, AP, and Inventory before making Dumbwit report. Viewing the Dumbwit provides a PK Reporter option.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Dumbwit_Privacy.user.js
+// @grant          none
 // @include        http://*urbandead.com/map.cgi*
 // @exclude        http://*urbandead.com/map.cgi?logout
 // @include        http://iamscott.net/*.html
@@ -32,7 +33,8 @@ function addButton(btnName) {
 				var pre_body = document.body.innerHTML;
 				var barrista = document.getElementById('barrista');
 				if (barrista) hideBarrista();
-				else hideDefault();
+				var defgt = document.evaluate('//td[@class="cp"]//div[@class="gt"]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
+				if (defgt) hideDefault();
 				hideInventory();
 				getDumbwit();
 				// return info
@@ -70,10 +72,10 @@ function hideBarrista() {
 	var HP_bar = document.getElementById('barristahpbar');
 
 	// hide info
-	AP.innerHTML = 'XXAP'
+	AP.innerHTML = 'XXAP';
 	AP_bar.parentNode.removeChild(AP_bar);
 	AP_time.innerHTML = AP_time.innerHTML.replace(/[0-9]+/, 'XXXX');
-	HP.innerHTML = 'XXHP'
+	HP.innerHTML = 'XXHP';
 	HP_bar.parentNode.removeChild(HP_bar);
 }
 
