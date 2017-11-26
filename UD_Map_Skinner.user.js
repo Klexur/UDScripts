@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        0.8.1
+// @version        1.0.0
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @grant          GM_addStyle
@@ -11,6 +11,7 @@
 
 // images converted using http://uri.rappdaniel.com/
 
+// This variable controls whether the GPS of the current city block show displayed next to the suburb name
 var showGPS = true;
 
 addStyles();
@@ -340,6 +341,7 @@ function specialBlocks() {
 			}
 		}
 	}
+	// Check if at edge of map
 	if (blocks.snapshotLength < 10) addBorder();
 }
 
@@ -356,6 +358,7 @@ function getGPS(bordercheck) {
 	return gps;
 }
 
+// Function to add the current GPS coordinates after the suburb name
 function showCoords(coordinates) {
 	var elem = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr/td[@class='sb']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 
@@ -363,6 +366,7 @@ function showCoords(coordinates) {
 	if(coordinates != null) elem.snapshotItem(0).innerHTML += ' [' + coordinates + ']';
 }
 
+// Function to add filler type blocks if at the edge of the map
 function addBorder() {
 	var coords = getGPS(true);
 	var left = ((coords[0] == 0) ? true:false);
