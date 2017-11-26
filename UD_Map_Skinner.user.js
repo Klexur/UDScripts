@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           UD Map Skinner
 // @namespace      Klexur
-// @version        1.0.0
+// @version        1.1.0
 // @description    Applies images from the original Firefox UDToolbar to the UrbanDead in-game map.
 // @updateURL      https://github.com/Klexur/UDScripts/raw/master/UD_Map_Skinner.user.js
 // @grant          GM_addStyle
@@ -362,8 +362,18 @@ function getGPS(bordercheck) {
 function showCoords(coordinates) {
 	var elem = document.evaluate("//td[@class='cp']/table[@class='c']/tbody/tr/td[@class='sb']", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
 
-	if(elem.snapshotLength == 0) return;
-	if(coordinates != null) elem.snapshotItem(0).innerHTML += ' [' + coordinates + ']';
+	if(elem.snapshotLength == 0 || !coordinates ) return;
+
+	// Create DSS Map link
+	var url = "http://map.dssrzs.org/location/" + coordinates;
+    var link = document.createElement('a');
+	link.href = url;
+	link.target = 'blank';
+	var coords = coordinates.split('-');
+	// x = coords[0], y = coords[1]
+	link.textContent = ' [' + coords[0] + ',' + coords[1] + ']';
+
+    elem.snapshotItem(0).appendChild(link);
 }
 
 // Function to add filler type blocks if at the edge of the map
